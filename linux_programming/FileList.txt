@@ -1,0 +1,9 @@
+sw_app1;    a1; a2; a3
+sw_app2;    b1; b2;
+sw_app3;	c1;
+sw_app1;    d1; d2; d3
+sw_app2;    e1; e2;
+sw_app3;    f1;
+sw_app1;    g1; g2; g3
+sw_app2;    h1; h2;
+sw_app3;    i1;
