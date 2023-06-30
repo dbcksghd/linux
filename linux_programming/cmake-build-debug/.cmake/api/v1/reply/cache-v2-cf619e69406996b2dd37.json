@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/yoochanhong/Desktop/linux/cmake-build-debug"
+			"value" : "/Users/yoochanhong/Desktop/github/dbcksghd/linux/linux_programming/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -383,7 +383,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/yoochanhong/Desktop/linux/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/Users/yoochanhong/Desktop/github/dbcksghd/linux/linux_programming/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -443,7 +443,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/yoochanhong/Desktop/linux"
+			"value" : "/Users/yoochanhong/Desktop/github/dbcksghd/linux/linux_programming"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -1015,7 +1015,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/yoochanhong/Desktop/linux/cmake-build-debug"
+			"value" : "/Users/yoochanhong/Desktop/github/dbcksghd/linux/linux_programming/cmake-build-debug"
 		},
 		{
 			"name" : "linux_IS_TOP_LEVEL",
@@ -1039,7 +1039,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/yoochanhong/Desktop/linux"
+			"value" : "/Users/yoochanhong/Desktop/github/dbcksghd/linux/linux_programming"
 		}
 	],
 	"kind" : "cache",

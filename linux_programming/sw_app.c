@@ -2,7 +2,6 @@
 #include <time.h>
 #include <sys/time.h>
 #include <sys/stat.h>
-#include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -59,51 +58,29 @@ int main(int argc, char **argv) {
 
     sleep(ran % 20 + 1);
 
-    if (ran % 2) //odd => signal
-
-    {
-
+    if (ran % 2) {
         int signum = ((ran / 2) % 15 + 1);
-
         FILE *fp;
-
         fp = fopen(LOGFILE, "a");
-
         fprintf(fp, "process name: %s\t", argv[0]);
-
-        for (int k = 1; k < argc; k++)
-
+        for (int k = 1; k < argc; k++) {
             fprintf(fp, "%s ", argv[k]);
-
+        }
         fprintf(fp, "crash time: %s\t", gettime());
-
         fprintf(fp, "SIGNAL(%d).%s\n", signum, strsignal(signum));
-
         fclose(fp);
-
         kill(getpid(), signum);
-    } else // even -> exit
-
-    {
-
+    } else {
         int exitval = (ran / 2) % 256;
-
         FILE *fp;
-
         fp = fopen(LOGFILE, "a");
-
         fprintf(fp, "process name: %s\t", argv[0]);
-
-        for (int k = 1; k < argc; k++)
-
+        for (int k = 1; k < argc; k++) {
             fprintf(fp, "%s ", argv[k]);
-
+        }
         fprintf(fp, "crash time: %s\t", gettime());
-
         fprintf(fp, "EXIT(%d)\n", exitval);
-
         fclose(fp);
-
         exit(exitval);
     }
 }

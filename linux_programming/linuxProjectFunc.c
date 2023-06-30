@@ -1,10 +1,6 @@
-#include <sys/types.h>
-#include <sys/wait.h>
 #include <sys/stat.h>
 #include <sys/time.h>
-#include <fcntl.h>
 #include <unistd.h>
-#include <signal.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
@@ -13,8 +9,7 @@
 
 #include "linuxProject.h"
 
-void InitSwManager(swManager *info) //Init struct swManager
-{
+void InitSwManager(swManager *info) {
     info->p_no = 0;
     info->dpid = 0;
     for (int i = 0; i < BLOCK_COUNT; i++) {
@@ -39,14 +34,14 @@ void readFileList(swManager *info) {
 
     while (fgets(str, MAX_STR, fp)) {
         String result;
-        str[strlen(str) - 1] = 0; // cut \n
+        str[strlen(str) - 1] = 0;
 
         result = strtok(str, ";");
         strcpy(result, trim(result));
 
         strcpy(info->sw_param[swno].SwBlock, result);
 
-        for (int i = 0; result = strtok(NULL, ";"); i++) {
+        for (int i = 0; (result = strtok(NULL, ";")); i++) {
             strcpy(result, trim(result));
 
             switch (i) {

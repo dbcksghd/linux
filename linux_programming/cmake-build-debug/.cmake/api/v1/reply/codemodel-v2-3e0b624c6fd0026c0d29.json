@@ -32,8 +32,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/yoochanhong/Desktop/linux/cmake-build-debug",
-		"source" : "/Users/yoochanhong/Desktop/linux"
+		"build" : "/Users/yoochanhong/Desktop/github/dbcksghd/linux/linux_programming/cmake-build-debug",
+		"source" : "/Users/yoochanhong/Desktop/github/dbcksghd/linux/linux_programming"
 	},
 	"version" : 
 	{

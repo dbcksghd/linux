@@ -1,2 +1,2 @@
-/Users/yoochanhong/Desktop/linux/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/yoochanhong/Desktop/linux/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/yoochanhong/Desktop/github/dbcksghd/linux/linux_programming/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/yoochanhong/Desktop/github/dbcksghd/linux/linux_programming/cmake-build-debug/CMakeFiles/rebuild_cache.dir
