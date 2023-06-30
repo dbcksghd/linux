@@ -13,7 +13,8 @@
 
 #include "linuxProject.h"
 
-void InitSwManager(swManager *info) {
+void InitSwManager(swManager *info) //Init struct swManager
+{
     info->p_no = 0;
     info->dpid = 0;
     for (int i = 0; i < BLOCK_COUNT; i++) {
@@ -35,16 +36,19 @@ void readFileList(swManager *info) {
     fp = fopen("./FileList", "r");
     char str[MAX_STR];
     int swno = 0;
+
     while (fgets(str, MAX_STR, fp)) {
         String result;
-        str[strlen(str) - 1] = 0;
+        str[strlen(str) - 1] = 0; // cut \n
+
         result = strtok(str, ";");
         strcpy(result, trim(result));
 
         strcpy(info->sw_param[swno].SwBlock, result);
 
-        for (int i = 0; (result = strtok(NULL, ";")); i++) {
+        for (int i = 0; result = strtok(NULL, ";"); i++) {
             strcpy(result, trim(result));
+
             switch (i) {
                 case 0:
                     strcpy(info->sw_param[swno].App_para1, result);
@@ -55,12 +59,15 @@ void readFileList(swManager *info) {
                 case 2:
                     strcpy(info->sw_param[swno].App_para3, result);
                     break;
+
                 default:
                     break;
             }
         }
+
         swno++;
     }
+
     info->p_no = swno;
 }
 
@@ -73,10 +80,13 @@ void InitSWBlock(swManager *info) {
         sprintf(info->sw_info[i].reason, "Init.");
         sprintf(info->sw_info[i].restart_count, "%d", 0);
         strcpy(info->sw_info[i].start_time, gettime());
+
         LogWrite(&(info->sw_info[i]));
         LogInterface(info);
+
         pid = fork();
-        if (pid > 0) {
+
+        if (pid > 0) { //p
             info->pids[i] = pid;
         } else if (pid == 0) {
             char path[30] = "./";
@@ -90,7 +100,10 @@ void InitSWBlock(swManager *info) {
 }
 
 void restartProcess(swManager *info, int index) {
-    pid_t pid = fork();
+    pid_t pid;
+
+    pid = fork();
+
     if (pid > 0) {
         info->pids[index] = pid;
         strcpy(info->sw_info[index].start_time, gettime());
@@ -110,6 +123,7 @@ int FindIndex(swManager *info) {
             return i;
         }
     }
+
     return -1;
 }
 
@@ -117,14 +131,21 @@ void LogWrite(swInfo *list) {
     mkdir(LOGDIR, 0755);
     chdir(LOGDIR);
 
-    FILE *fp = fopen(LOGFILE, "a");
+    FILE *fp;
+
+    fp = fopen(LOGFILE, "a");
+
     fprintf(fp, "process name: %s\trestart count: %s\tstart time: %s\treason: %s\n",
             list->name, list->restart_count, list->start_time, list->reason);
+
     fclose(fp);
+
     chdir("../");
 }
 
 void LogInterface(swManager *info) {
+    char param[10];
+
     system("clear");
     printf(" _____________________________________________________________________________________________ \n");
     printf("| Process name | Restart count |       Start time        |               Reason               |\n");
@@ -136,6 +157,7 @@ void LogInterface(swManager *info) {
         printf(" %s|", info->sw_info[i].start_time);
         printf(" %34s |\n", info->sw_info[i].reason);
     }
+
     printf("|______________|_______________|_________________________|____________________________________|\n");
 }
 
@@ -163,12 +185,19 @@ char *trim(const char *s) {
 
 char *gettime(void) {
     struct timeval tv;
+
     gettimeofday(&tv, NULL);
+
     time_t t = (time_t) tv.tv_sec;
+
     struct tm *ptm = localtime(&t);
+
     static char str[1024];
+
     sprintf(str, "%04d.%02d.%02d %02d:%02d:%02d.%03d ",
+
             ptm->tm_year + 1900, ptm->tm_mon + 1, ptm->tm_mday,
+
             ptm->tm_hour, ptm->tm_min, ptm->tm_sec, (int) tv.tv_usec / 1000);
 
     return str;

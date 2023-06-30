@@ -4,44 +4,47 @@
 #include <sys/types.h>
 
 #define MAX_STR 100
-#define BLOCK_COUNT 10
+#define BLOCK_COUNT 10  //Max Sw Block number
 
 #define LOGDIR  "./log"
 #define LOGFILE "restart.txt"
 
+typedef char *String;
 
 typedef struct _swInfo {
-    char name[20]; //프로세스 이름
-    char restart_count[20]; //재시작 횟수 (char*)
-    char start_time[30]; //시작/재시작  시간
-    char reason[50]; //종료 이유
-    int int_restart; //재시작 횟수 (int)
+    String name;    //process name
+    String restart_count;   //restart count (char*)
+    String start_time;  //start/restart time
+    String reason;  //process signal/exit code
+    int int_restart;    //restart count (int)
 } swInfo;
 
 typedef struct _swParam {
-    char SwBlock[20]; // 프로세스 이름
-    char App_params[3][20]; //파라미터
+    String SwBlock;     // process name
+    String App_para1;   // 1st parameter
+    String App_para2;   // 2nd parameter
+    String App_para3;   // 3rd parameter
 } swParam;
 
 typedef struct _swInfoManager {
-    pid_t pids[BLOCK_COUNT]; //pid 배열
-    pid_t dpid; //죽은 pid
-    int p_no; //pid 숫자
-    swInfo sw_info[BLOCK_COUNT]; // swInfo 구조체 배열
-    swParam sw_param[BLOCK_COUNT]; // swParam 구조체 배열
+    pid_t pids[BLOCK_COUNT];    //process pid array
+    pid_t dpid; //dead pid
+    int p_no;   //pid number
+    swInfo sw_info[BLOCK_COUNT];    // struct swInfo array
+    swParam sw_param[BLOCK_COUNT];  // struct swParam array
 } swManager;
 
 void InitSwManager(swManager *info);
 
 void readFileList(swManager *info);
 
-void InitSwBlock(swManager *info, FILE *log_file);
+void InitSWBlock(swManager *info);
 
 void restartProcess(swManager *info, int index);
 
-void LogInterface(const swManager *info);
+void LogInterface(swManager *info);
 
-int FindIndex(const swManager *info);
+int FindIndex(swManager *info);
 
 char *rtrim(const char *s);
 
@@ -49,8 +52,8 @@ char *ltrim(const char *s);
 
 char *trim(const char *s);
 
-char *getTime(void);
+char *gettime(void);
 
-void LogWrite(FILE *log_file, const swInfo *list);
+void LogWrite(swInfo *list);
 
 #endif
