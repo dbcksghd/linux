@@ -52,7 +52,7 @@ char *ltrim(const char *s);
 
 char *trim(const char *s);
 
-char *gettime(void);
+char *getTime(void);
 
 void LogWrite(swInfo *list);
 

@@ -74,7 +74,7 @@ void InitSWBlock(swManager *info) {
         strcpy(info->sw_info[i].name, info->sw_param[i].SwBlock);
         sprintf(info->sw_info[i].reason, "Init.");
         sprintf(info->sw_info[i].restart_count, "%d", 0);
-        strcpy(info->sw_info[i].start_time, gettime());
+        strcpy(info->sw_info[i].start_time, getTime());
 
         LogWrite(&(info->sw_info[i]));
         LogInterface(info);
@@ -101,7 +101,7 @@ void restartProcess(swManager *info, int index) {
 
     if (pid > 0) {
         info->pids[index] = pid;
-        strcpy(info->sw_info[index].start_time, gettime());
+        strcpy(info->sw_info[index].start_time, getTime());
     } else if (pid == 0) {
         char path[30] = "./";
         strcat(path, info->sw_param[index].SwBlock);
@@ -178,7 +178,7 @@ char *trim(const char *s) {
     return f;
 }
 
-char *gettime(void) {
+char *getTime(void) {
     struct timeval tv;
 
     gettimeofday(&tv, NULL);
