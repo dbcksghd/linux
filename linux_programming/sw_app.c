@@ -11,12 +11,13 @@
 #define LOGDIR "./log"
 #define LOGFILE "mylog"
 
-char *gettime(void) {
+char *gettime(void)
+{
     struct timeval tv;
 
     gettimeofday(&tv, NULL);
 
-    time_t t = (time_t) tv.tv_sec;
+    time_t t = (time_t)tv.tv_sec;
 
     struct tm *ptm = localtime(&t);
 
@@ -26,12 +27,13 @@ char *gettime(void) {
 
             ptm->tm_year + 1900, ptm->tm_mon + 1, ptm->tm_mday,
 
-            ptm->tm_hour, ptm->tm_min, ptm->tm_sec, (int) tv.tv_usec / 1000);
+            ptm->tm_hour, ptm->tm_min, ptm->tm_sec, (int)tv.tv_usec / 1000);
 
     return str;
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
 
     struct timeval tv;
 
@@ -82,7 +84,9 @@ int main(int argc, char **argv) {
         fclose(fp);
 
         kill(getpid(), signum);
-    } else // even -> exit
+    }
+
+    else // even -> exit
 
     {
 

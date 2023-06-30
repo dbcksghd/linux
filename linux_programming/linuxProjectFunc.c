@@ -1,6 +1,10 @@
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+#include <fcntl.h>
 #include <unistd.h>
+#include <signal.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
@@ -9,7 +13,8 @@
 
 #include "linuxProject.h"
 
-void InitSwManager(swManager *info) {
+void InitSwManager(swManager *info) //Init struct swManager
+{
     info->p_no = 0;
     info->dpid = 0;
     for (int i = 0; i < BLOCK_COUNT; i++) {
@@ -74,7 +79,7 @@ void InitSWBlock(swManager *info) {
         strcpy(info->sw_info[i].name, info->sw_param[i].SwBlock);
         sprintf(info->sw_info[i].reason, "Init.");
         sprintf(info->sw_info[i].restart_count, "%d", 0);
-        strcpy(info->sw_info[i].start_time, getTime());
+        strcpy(info->sw_info[i].start_time, gettime());
 
         LogWrite(&(info->sw_info[i]));
         LogInterface(info);
@@ -101,7 +106,7 @@ void restartProcess(swManager *info, int index) {
 
     if (pid > 0) {
         info->pids[index] = pid;
-        strcpy(info->sw_info[index].start_time, getTime());
+        strcpy(info->sw_info[index].start_time, gettime());
     } else if (pid == 0) {
         char path[30] = "./";
         strcat(path, info->sw_param[index].SwBlock);
@@ -178,7 +183,7 @@ char *trim(const char *s) {
     return f;
 }
 
-char *getTime(void) {
+char *gettime(void) {
     struct timeval tv;
 
     gettimeofday(&tv, NULL);
