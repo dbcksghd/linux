@@ -1,0 +1,2 @@
+process name: ./a.out	start time: 2023.06.30 02:10:04.845 
+process name: ./a.out	crash time: 2023.06.30 02:10:21.847 	EXIT(210)
